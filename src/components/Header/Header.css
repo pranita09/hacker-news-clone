@@ -1,0 +1,13 @@
+.headerContainer {
+  padding: 0.75rem 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.headerText {
+  text-align: center;
+  font-weight: 900;
+}
+
+.highlightedText {
+  color: var(--primaryColor);
+}

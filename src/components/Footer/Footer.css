@@ -1,0 +1,13 @@
+.footerContainer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 2.75rem 0;
+  background-color: var(--primaryColor);
+}
+
+h1 {
+  text-align: center;
+  padding: 0.5rem 0;
+  font-weight: 900;
+}
