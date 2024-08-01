@@ -1,9 +1,12 @@
 .footerContainer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 2.75rem 0;
+  grid-row: 3;
+  padding: 1.75rem 0;
   background-color: var(--primaryColor);
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 h1 {

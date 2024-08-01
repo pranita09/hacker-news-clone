@@ -10,3 +10,11 @@
   --black: rgba(0, 0, 0, 0.82);
   --greyText: rgba(0, 0, 0, 0.5);
 }
+
+.App {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  background-color: whitesmoke;
+  overflow: hidden;
+}
