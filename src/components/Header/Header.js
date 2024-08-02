@@ -1,13 +1,10 @@
 import "./Header.css";
+import hackernewsLogo from "../../assets/hackernews1.svg";
 
 const Header = () => {
   return (
     <div className="headerContainer">
-      <h1 className="headerText">
-        <span className="highlightedText">HACKER</span>
-        NEWS
-        <span className="highlightedText">.</span>
-      </h1>
+      <img src={hackernewsLogo} alt="Logo" />
     </div>
   );
 };

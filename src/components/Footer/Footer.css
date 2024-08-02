@@ -1,16 +1,18 @@
 .footerContainer {
   grid-row: 3;
-  padding: 1.75rem 0;
+  padding: 2rem 0;
   background-color: var(--primaryColor);
   position: sticky;
   bottom: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
+  display: flex;
+  justify-content: center;
 }
 
-h1 {
-  text-align: center;
-  padding: 0.5rem 0;
-  font-weight: 900;
+img {
+  /* text-align: center; */
+  /* padding: 0.5rem 0; */
+  /* font-weight: 900; */
 }

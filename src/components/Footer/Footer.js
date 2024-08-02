@@ -1,9 +1,10 @@
 import "./Footer.css";
+import hackerNewsLogo from "../../assets/hackernews2.svg";
 
 const Footer = () => {
   return (
     <div className="footerContainer">
-      <h1>HACKERNEWS.</h1>
+      <img src={hackerNewsLogo} alt="Logo" />
     </div>
   );
 };

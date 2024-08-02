@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { newStoriesAPIEndpoint, pastStoriesAPIEndpoint } from "../utils";
 
 export const DataContext = createContext();
 
@@ -10,17 +11,18 @@ export const DataProvider = ({ children }) => {
   const [stories, setStories] = useState([]);
   const [storyIds, setStoryIds] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedTab, setSelectedTab] = useState("new");
   const BATCH_SIZE = 5;
   const initialFetchDone = useRef(false);
 
-  const fetchStoryIds = async () => {
+  const fetchStoryIds = async (apiEndpoint) => {
     setLoading(true);
     try {
-      const responseIds = await axios.get(
-        "https://hacker-news.firebaseio.com/v0/topstories.json"
-      );
+      const responseIds = await axios.get(`${apiEndpoint}`);
       setStoryIds(responseIds.data);
       setCurrentIndex(0);
+      setStories([]);
+      initialFetchDone.current = false;
     } catch (error) {
       console.log("Error while fetching story ids: ", error);
       setError(error.message);
@@ -51,8 +53,15 @@ export const DataProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchStoryIds();
-  }, []);
+    if (selectedTab === "new") {
+      fetchStoryIds(newStoriesAPIEndpoint);
+    } else {
+      console.log("past");
+      fetchStoryIds(pastStoriesAPIEndpoint);
+    }
+  }, [selectedTab]);
+
+  console.log("selected", selectedTab);
 
   useEffect(() => {
     if (storyIds.length > 0 && !initialFetchDone.current) {
@@ -61,14 +70,23 @@ export const DataProvider = ({ children }) => {
     } else if (storyIds.length > 0 && currentIndex > 0) {
       fetchStories();
     }
-  }, [storyIds, currentIndex]);
+  }, [storyIds, currentIndex, selectedTab]);
 
   const handleLoadMore = () => {
     setCurrentIndex((prevIndex) => prevIndex + BATCH_SIZE);
   };
 
   return (
-    <DataContext.Provider value={{ stories, loading, error, handleLoadMore }}>
+    <DataContext.Provider
+      value={{
+        stories,
+        loading,
+        error,
+        handleLoadMore,
+        selectedTab,
+        setSelectedTab,
+      }}
+    >
       {children}
     </DataContext.Provider>
   );

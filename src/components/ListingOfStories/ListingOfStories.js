@@ -1,24 +1,19 @@
-import { useState, useMemo } from "react";
 import { useData } from "../../context/dataContext";
 import Story from "../Story/Story";
 import "./ListingOfStories.css";
 
 const ListingOfStories = () => {
-  const { stories, loading, error, handleLoadMore } = useData();
-  const [sortOption, setSortOption] = useState("new");
+  const {
+    stories,
+    loading,
+    error,
+    handleLoadMore,
+    selectedTab,
+    setSelectedTab,
+  } = useData();
 
-  const sortedStories = useMemo(() => {
-    return [...stories].sort((a, b) => {
-      if (sortOption === "new") {
-        return b.time - a.time;
-      } else {
-        return a.time - b.time;
-      }
-    });
-  }, [stories, sortOption]);
-
-  const handleSortChange = (option) => {
-    setSortOption(option);
+  const handleTabChange = (option) => {
+    setSelectedTab(option);
   };
 
   return (
@@ -29,23 +24,25 @@ const ListingOfStories = () => {
         <div className="container">
           <div className="actions">
             <button
-              className={`btn newBtn ${sortOption === "new" ? "selected" : ""}`}
-              onClick={() => handleSortChange("new")}
+              className={`btn newBtn ${
+                selectedTab === "new" ? "selected" : ""
+              }`}
+              onClick={() => handleTabChange("new")}
             >
               New
             </button>
             <button
               className={`btn pastBtn ${
-                sortOption === "past" ? "selected" : ""
+                selectedTab === "past" ? "selected" : ""
               }`}
-              onClick={() => handleSortChange("past")}
+              onClick={() => handleTabChange("past")}
             >
               Past
             </button>
           </div>
           <div className="storiesList">
             <div className="stories">
-              {sortedStories?.map((story) => (
+              {stories?.map((story) => (
                 <Story key={story.id} story={story} />
               ))}
             </div>

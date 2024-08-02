@@ -1,6 +1,6 @@
 .listContainer {
   grid-row: 2;
-  width: 55%;
+  width: 45%;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -20,16 +20,17 @@
 .actions {
   display: flex;
   gap: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .btn {
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  background-color: rgb(216, 213, 213);
+  background: rgba(242, 242, 242, 1);
 }
 
 .selected {
@@ -43,7 +44,7 @@
 }
 
 .storiesList {
-  padding: 1rem 0 1.25rem 0;
+  padding: 0.25rem 0 1.25rem 0;
   overflow: auto;
 }
 
@@ -60,4 +61,5 @@
   text-align: center;
   font-weight: 500;
   font-size: 1.15rem;
+  padding: 2rem 0;
 }
