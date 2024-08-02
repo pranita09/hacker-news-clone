@@ -31,7 +31,7 @@ export const getTimeDifference = (timestamp) => {
   }
 };
 
-export const truncateText = (text, wordCount = 20) => {
+export const truncateText = (text, wordCount = 27) => {
   const words = text.split(" ");
 
   // if the text has fewer words than twice the wordCount, return the original text
