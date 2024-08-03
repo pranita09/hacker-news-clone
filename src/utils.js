@@ -31,16 +31,18 @@ export const getTimeDifference = (timestamp) => {
   }
 };
 
-export const truncateText = (text, wordCount = 27) => {
-  const words = text.split(" ");
+export const calculateVisibleWords = (width, textToTruncate) => {
+  const words = textToTruncate.split(" ");
+  const avgWordWidth = 25; // approximate average word width in pixels
+  const wordsPerLine = Math.floor(width / avgWordWidth);
+  const totalVisibleWords = wordsPerLine * 3; // sssuming 3 lines of text
 
-  // if the text has fewer words than twice the wordCount, return the original text
-  if (words.length <= 2 * wordCount) {
-    return text;
+  if (words.length <= totalVisibleWords) {
+    return textToTruncate;
   }
 
-  const firstPart = words.slice(0, wordCount).join(" ");
-  const lastPart = words.slice(-wordCount).join(" ");
+  const startWords = words.slice(0, wordsPerLine).join(" ");
+  const endWords = words.slice(-wordsPerLine).join(" ");
 
-  return `${firstPart} ... ${lastPart}`;
+  return `${startWords} ... ${endWords}`;
 };

@@ -61,8 +61,6 @@ export const DataProvider = ({ children }) => {
     }
   }, [selectedTab]);
 
-  console.log("selected", selectedTab);
-
   useEffect(() => {
     if (storyIds.length > 0 && !initialFetchDone.current) {
       initialFetchDone.current = true;
