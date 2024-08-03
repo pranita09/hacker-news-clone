@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./Story.css";
 import { useRef, useState, useEffect } from "react";
 import {
