@@ -1,8 +1,9 @@
+import React from "react";
 import { useData } from "../../context/dataContext";
 import Story from "../Story/Story";
 import "./ListingOfStories.css";
 
-const ListingOfStories = () => {
+const ListingOfStories: React.FC = () => {
   const {
     stories,
     loading,
@@ -12,7 +13,7 @@ const ListingOfStories = () => {
     setSelectedTab,
   } = useData();
 
-  const handleTabChange = (option) => {
+  const handleTabChange = (option: string) => {
     setSelectedTab(option);
   };
 

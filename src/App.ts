@@ -1,9 +1,10 @@
 import "./App.css";
+import React from "react";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import ListingOfStories from "./components/ListingOfStories/ListingOfStories";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Header />
@@ -11,6 +12,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

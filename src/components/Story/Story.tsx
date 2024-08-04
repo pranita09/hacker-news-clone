@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import "./Story.css";
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   dummyDescription,
   dummyTitle,
@@ -8,17 +8,18 @@ import {
   calculateVisibleWords,
 } from "../../utils";
 import clock from "../../assets/clock.svg";
+import { StoryProps } from "../../types/types";
 
-const Story = ({ story }) => {
+const Story: React.FC<StoryProps> = ({ story }) => {
   const { title, text, time, descendants, url } = story;
-  const textRef = useRef();
-  const [visibleText, setVisibleText] = useState("");
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [visibleText, setVisibleText] = useState<string>("");
   const textToTruncate = text ? text : dummyDescription;
 
   const updateVisibleText = () => {
     if (textRef.current) {
       const containerWidth = textRef.current.offsetWidth;
-      console.log(containerWidth);
+      // console.log(containerWidth);
       setVisibleText(calculateVisibleWords(containerWidth, textToTruncate));
     }
   };

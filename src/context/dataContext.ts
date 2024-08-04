@@ -1,21 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  ReactNode,
+} from "react";
 import { newStoriesAPIEndpoint, pastStoriesAPIEndpoint } from "../utils";
+import { Story, DataContextType } from "../types/types";
 
-export const DataContext = createContext();
+export const DataContext = createContext<DataContextType | undefined>(
+  undefined
+);
 
-export const DataProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [stories, setStories] = useState([]);
-  const [storyIds, setStoryIds] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedTab, setSelectedTab] = useState("new");
+export const DataProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [stories, setStories] = useState<Story[]>([]);
+  const [storyIds, setStoryIds] = useState<number[]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [selectedTab, setSelectedTab] = useState<string>("new");
   const BATCH_SIZE = 5;
-  const initialFetchDone = useRef(false);
+  const initialFetchDone = useRef<boolean>(false);
 
-  const fetchStoryIds = async (apiEndpoint) => {
+  const fetchStoryIds = async (apiEndpoint: string) => {
     setLoading(true);
     try {
       const responseIds = await axios.get(`${apiEndpoint}`);
@@ -25,7 +37,7 @@ export const DataProvider = ({ children }) => {
       initialFetchDone.current = false;
     } catch (error) {
       console.log("Error while fetching story ids: ", error);
-      setError(error.message);
+      setError((error as Error).message);
     } finally {
       setLoading(false);
     }
@@ -46,7 +58,7 @@ export const DataProvider = ({ children }) => {
       setStories((prevStories) => [...prevStories, ...storiesData]);
     } catch (error) {
       console.log("Error while fetching story data: ", error);
-      setError(error.message);
+      setError((error as Error).message);
     } finally {
       setLoading(false);
     }
@@ -90,4 +102,10 @@ export const DataProvider = ({ children }) => {
   );
 };
 
-export const useData = () => useContext(DataContext);
+export const useData = (): DataContextType => {
+  const context = useContext(DataContext);
+  if (context === undefined) {
+    throw new Error("useData must be used within a DataProvider");
+  }
+  return context;
+};
