@@ -63,3 +63,15 @@
   font-size: 1.15rem;
   padding: 2rem 0;
 }
+
+@media (max-width: 481px) {
+  .listContainer {
+    width: 95%;
+  }
+}
+
+@media (min-width: 641px) {
+  .listContainer {
+    width: 70%;
+  }
+}
